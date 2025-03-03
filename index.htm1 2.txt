@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>互动链接</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #FDE6EE; /* 你指定的背景颜色 */
+            color: #333; /* 文字颜色 */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.8); /* 半透明白色背景 */
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: #949EC5; /* 你指定的字体颜色 */
+        }
+        input {
+            padding: 10px;
+            font-size: 1rem;
+            width: 80%;
+            border: none;
+            border-radius: 5px;
+            margin-bottom: 15px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 1rem;
+            background-color: #c5a6c4; /* 你指定的按钮背景颜色 */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #b28fb0; /* 按钮悬停颜色 */
+        }
+        .hidden {
+            display: none;
+        }
+        .options {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        .options button {
+            background-color: #c5a6c4; /* 你指定的按钮背景颜色 */
+        }
+        .options button:hover {
+            background-color: #b28fb0; /* 按钮悬停颜色 */
+        }
+        #page3 h1 {
+            color: #949EC5; /* 你指定的字体颜色 */
+        }
+        #result {
+            margin-top: 20px;
+            font-size: 1.2rem;
+            color: #949EC5; /* 你指定的字体颜色 */
+        }
+    </style>
+</head>
+<body>
+    <!-- 页面 1：欢迎页面 -->
+    <div class="container" id="page1">
+        <h1>你特么才来</h1>
+        <p>请输入你的名字：</p >
+        <input type="text" id="nameInput" placeholder="你的名字">
+        <button onclick="showResult()">提交</button>
+        <div id="result"></div>
+    </div>
+
+    <!-- 页面 2：互动页面 -->
+    <div class="container hidden" id="page2">
+        <h1>你喜不喜欢我</h1> <!-- 修改后的标题 -->
+        <div class="options">
+            <button onclick="goToPage3()">嗯嗯</button>
+            <button onclick="goToPage3()">喜欢</button>
+        </div>
+    </div>
+
+    <!-- 页面 3：感谢页面 -->
+    <div class="container hidden" id="page3">
+        <h1>我也喜欢你🫶🏻</h1>
+        <p>我们要一直一直在一起</p >
+        <button onclick="resetPage()">返回</button>
+    </div>
+
+    <script>
+        // 页面 1 的逻辑
+        function showResult() {
+            const name = document.getElementById('nameInput').value;
+            if (!name) {
+                alert("请输入你的名字！");
+                return;
+            }
+
+            // 显示短暂文字
+            document.getElementById('result').innerText = `${name} 你终于来啦🥺`;
+
+            // 1秒后切换到页面 2
+            setTimeout(() => {
+                document.getElementById('page1').classList.add('hidden');
+                document.getElementById('page2').classList.remove('hidden');
+            }, 1000); // 1秒后切换
+        }
+
+        // 页面 2 的逻辑
+        function goToPage3() {
+            // 切换到页面 3
+            document.getElementById('page2').classList.add('hidden');
+            document.getElementById('page3').classList.remove('hidden');
+        }
+
+        // 页面 3 的逻辑
+        function resetPage() {
+            // 重置页面
+            document.getElementById('page1').classList.remove('hidden');
+            document.getElementById('page3').classList.add('hidden');
+            document.getElementById('nameInput').value = '';
+            document.getElementById('result').innerText = '';
+        }
+    </script>
+</body>
+</html>
